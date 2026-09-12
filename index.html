@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هدية لأجمل نونو ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; font-family:Tahoma,Arial,sans-serif;
+  background:linear-gradient(135deg,#ff8fb1,#ffd1df,#ff9fbe);
+  color:#fff; display:flex; justify-content:center; align-items:center;
+  overflow-x:hidden;
+}
+body:before,body:after{
+  content:"❤"; position:fixed; font-size:90px; opacity:.12; z-index:0;
+}
+body:before{top:5%;left:5%} body:after{bottom:5%;right:5%}
+.card{
+  position:relative; z-index:1; width:min(92%,460px); padding:30px 24px;
+  border-radius:30px; background:rgba(255,255,255,.20);
+  backdrop-filter:blur(12px); box-shadow:0 15px 45px rgba(120,30,70,.25);
+  text-align:center;
+}
+h1{font-size:30px;margin:8px 0 18px}
+h2{font-size:25px;margin:10px 0}
+p{font-size:18px;line-height:2}
+.heart{font-size:62px;animation:pulse 1.2s infinite}
+input{
+  width:100%; padding:15px; border:0; border-radius:15px;
+  text-align:center; font-size:18px; outline:none; margin:12px 0;
+}
+button{
+  border:0; border-radius:15px; padding:14px 25px; font-size:17px;
+  font-weight:bold; color:#d84d7c; background:#fff; cursor:pointer;
+}
+button:active{transform:scale(.97)}
+#error{display:none;color:#fff;font-weight:bold}
+#gift{display:none}
+.photo{
+  width:100%; max-height:500px; object-fit:cover; border-radius:22px;
+  border:5px solid rgba(255,255,255,.7); margin:10px 0 15px;
+}
+.message{
+  background:rgba(255,255,255,.16); padding:18px; border-radius:20px;
+  margin-top:15px;
+}
+.counter{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:15px;
+}
+.unit{
+  background:rgba(255,255,255,.2); border-radius:18px; padding:13px 5px;
+}
+.num{display:block;font-size:27px;font-weight:bold}
+.label{font-size:14px}
+.small{font-size:13px;opacity:.85}
+@keyframes pulse{50%{transform:scale(1.12)}}
+</style>
+</head>
+<body>
+
+<div class="card" id="login">
+  <div class="heart">🎁</div>
+  <h1>هدية لأجمل نونو ❤️</h1>
+  <p>عشان تعرفي أنا بحبك قد إيه يا أجمل حاجة</p>
+  <input id="password" type="password" placeholder="اكتبي الباسورد 🔐"
+         onkeydown="if(event.key==='Enter') openGift()">
+  <button onclick="openGift()">افتحي هديتك 💝</button>
+  <p id="error">الباسورد غلط 😭 جربي تاني</p>
+</div>
+
+<div class="card" id="gift">
+  <div class="heart">❤️</div>
+  <h2>لفرح، أجمل حاجة في دنيتي</h2>
+
+  <img src="photo.jpg" class="photo" alt="صورتنا">
+
+  <div class="message">
+    <p>
+      مش عاوزك تزعلي مني، أنا بحبك أوي بجد.
+      حقك عليا في كل حاجة وحشة مريتي بيها بسببي.
+      أنا بحبك أوي وهعمل عشانك أي حاجة،
+      وهفضل دايمًا أحاول عشانك مهما حصل،
+      وعمري ما هتخلى عنك يا أجمل حاجة في دنيتي ❤️
+    </p>
+  </div>
+
+  <h2>💗 بقالنا سوا</h2>
+  <div class="counter">
+    <div class="unit"><span class="num" id="days">0</span><span class="label">يوم</span></div>
+    <div class="unit"><span class="num" id="hours">0</span><span class="label">ساعة</span></div>
+    <div class="unit"><span class="num" id="minutes">0</span><span class="label">دقيقة</span></div>
+  </div>
+  <p class="small">من 1 يناير 2026 ❤️</p>
+</div>
+
+<audio id="music" src="song.mp3" loop preload="auto"></audio>
+
+<script>
+const correctPassword = "love";
+const startDate = new Date("2026-01-01T00:00:00");
+
+function openGift(){
+  const value = document.getElementById("password").value;
+  if(value === correctPassword){
+    document.getElementById("login").style.display = "none";
+    document.getElementById("gift").style.display = "block";
+
+    const music = document.getElementById("music");
+    music.play().catch(()=>{});
+
+    updateCounter();
+    setInterval(updateCounter, 60000);
+  }else{
+    document.getElementById("error").style.display = "block";
+  }
+}
+
+function updateCounter(){
+  const now = new Date();
+  let diff = Math.max(0, now - startDate);
+
+  const totalMinutes = Math.floor(diff / 60000);
+  const days = Math.floor(totalMinutes / (60*24));
+  const hours = Math.floor((totalMinutes % (60*24)) / 60);
+  const minutes = totalMinutes % 60;
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+}
+</script>
+</body>
+</html>
